@@ -25,3 +25,5 @@ items:
   href: testing-multiplayer.md
 - name: WebSockets
   href: websockets.md
+- name: Platform Chat
+  href: chat.md
