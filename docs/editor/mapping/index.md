@@ -60,6 +60,7 @@ Once you have a selection, move modes control how you transform it. They are ava
 
 ## Next steps
 
-- Building maps for a specific game? Follow [Games](./games.md).
-- Ready to share your work? Follow [Publish](./publish.md).
-- Need keybinds while working? Keep [Shortcuts](./shortcuts.md) open.
+- Setting up your project? Follow [Games](https://sbox.game/learn/facepunch/map-project).
+- Ready to share your work? Follow [Publishing](https://sbox.game/learn/facepunch/map-publish).
+- Need keybinds while working? [Shortcuts](./shortcuts.md).
+- Looking for Tutorials? Follow [Tutorials](https://sbox.game/learn?topic=mapping).
