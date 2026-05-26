@@ -22,32 +22,6 @@ You can use `-beta staging` to host a server on the staging branch, this might n
 
 :::
 
-:::warning
-**Steam client binaries are no longer shipped with the dedicated server.** You must link them yourself before the server can initialize Steamworks. SteamCMD is required as a prerequisite, see [https://developer.valvesoftware.com/wiki/SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD).
-
-**Windows**
-
-If you have **SteamCMD** installed, set the registry entries pointing to the SteamCMD client DLLs (replace `$dir` with the path to your SteamCMD folder):
-
-```powershell
-New-Item -Path "HKCU:\SOFTWARE\Valve\Steam\ActiveProcess" -Force | Out-Null
-Set-ItemProperty -Path "HKCU:\SOFTWARE\Valve\Steam\ActiveProcess" -Name "SteamClientDll64" -Value "$dir\steamclient64.dll" -Type String
-Set-ItemProperty -Path "HKCU:\SOFTWARE\Valve\Steam\ActiveProcess" -Name "SteamClientDll" -Value "$dir\steamclient.dll" -Type String
-```
-
-Alternatively, installing the **Steam desktop client** will satisfy this requirement automatically.
-
-**Linux**
-
-Create a symlink from the SteamCMD client library to the location the server expects (replace `your_user` and the SteamCMD path accordingly):
-
-```bash
-ln -s /home/your_user/PATHTOYOUR/steamcmd/linux64/steamclient.so /home/your_user/.steam/sdk64/
-```
-
-You may need to create the `~/.steam/sdk64/` directory first. If you are running multiple Steam instances, ensure each user account has completed this step.
-:::
-
 # Running the Server
 
 Once installed, the default directory would be `steamcmd/steamapps/common/sbox dedicated server`.
@@ -71,6 +45,34 @@ The server runs on .NET, so you'll need the [.NET Runtime](https://dotnet.micros
 ```
 
 When run, this will load the `facepunch.sandbox` game with the `facepunch.flatgrass` map and the title would be *My Dedicated Server*.
+
+## Steam Client Binaries
+
+:::warning
+**Steam client binaries are no longer shipped with the dedicated server.** You must link them yourself before the server can initialize Steamworks. SteamCMD is required as a prerequisite, see [https://developer.valvesoftware.com/wiki/SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD).
+
+**Windows**
+
+If you have **SteamCMD** installed, set the registry entries pointing to the SteamCMD client DLLs (replace `$dir` with the path to your SteamCMD folder). You can add these commands to the top of your `Run-Server.bat` startup script:
+
+```powershell
+New-Item -Path "HKCU:\SOFTWARE\Valve\Steam\ActiveProcess" -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\SOFTWARE\Valve\Steam\ActiveProcess" -Name "SteamClientDll64" -Value "$dir\steamclient64.dll" -Type String
+Set-ItemProperty -Path "HKCU:\SOFTWARE\Valve\Steam\ActiveProcess" -Name "SteamClientDll" -Value "$dir\steamclient.dll" -Type String
+```
+
+Alternatively, installing the **Steam desktop client** will satisfy this requirement automatically.
+
+**Linux**
+
+Create a symlink from the SteamCMD client library to the location the server expects (replace `your_user` and the SteamCMD path accordingly). You only need to do this once, but you can also add it to your `run-server.sh` startup script:
+
+```bash
+ln -s /home/your_user/PATHTOYOUR/steamcmd/linux64/steamclient.so /home/your_user/.steam/sdk64/
+```
+
+You may need to create the `~/.steam/sdk64/` directory first. If you are running multiple Steam instances, ensure each user account has completed this step.
+:::
 
 
 # Configuration
