@@ -42,7 +42,7 @@ public static async Task<bool> ValidateToken( long steamId, string token )
 		{ "token", token }
 	};
 	var content = new StringContent( JsonSerializer.Serialize( data ), Encoding.UTF8, "application/json" );
-	var result = await http.PostAsync( "https://services.facepunch.com/sbox/auth/token", content );
+	var result = await http.PostAsync( "https://public.facepunch.com/sbox/auth/token", content );
 
 	if ( result.StatusCode != HttpStatusCode.OK ) return false;
 	

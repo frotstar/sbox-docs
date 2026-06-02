@@ -70,5 +70,5 @@ foreach ( var a in Sandbox.Services.Achievements.All )
 Or from outside the game, you can access it via the API
 
 ```markup
-https://services.facepunch.com/sbox/achievement/list?package=facepunch.testbed
+https://public.facepunch.com/sbox/achievement/list?package=facepunch.testbed
 ```

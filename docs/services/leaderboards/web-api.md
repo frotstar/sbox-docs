@@ -11,7 +11,7 @@ The API for leaderboards is publically accessible. Have fun!
 
 
 ```none
-https://services.facepunch.com/sbox/package/leaderboard/{package_ident}/
+https://public.facepunch.com/sbox/package/leaderboard/{package_ident}/
 ```
 
 
@@ -84,7 +84,7 @@ Allows a list of steamids to always show on the leaderboard, even if they're not
 
 
 ```none
-https://services.facepunch.com/sbox/package/leaderboard/facepunch.ss1/?stat=zombies_killed
+https://public.facepunch.com/sbox/package/leaderboard/facepunch.ss1/?stat=zombies_killed
 ```
 
 ```json
