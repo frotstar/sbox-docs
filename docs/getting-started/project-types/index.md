@@ -9,6 +9,9 @@ updated: 2025-06-15
 
 When creating a new project in s&box you are presented with a few different project types to make.
 
+- **[Game Project](/getting-started/project-types/game-project.md)** — the base level of project, which contains a game.
+- **[Addon Project](/getting-started/project-types/addon-project.md)** — adds assets to an existing Game Project.
+
 
 ## The sbproj file
 
