@@ -24,7 +24,7 @@ Texture JumpButton = Input.GetGlyph( "jump" );
 You can also choose between the default and outlined versions of glyphs, like so:
 
 ```csharp
-Texture JumpButton = Input.GetGlyph( "jump", true );
+Texture JumpButton = Input.GetGlyph( "jump", InputGlyphSize.Small, true );
 ```
 
 ![PlayStation glyphs using the outline style](./images/playstation-glyphs-using-the-outline-style.png)
