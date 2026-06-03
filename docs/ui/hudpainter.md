@@ -26,6 +26,6 @@ This is more efficient than using actual UI panels because there's no layout, st
 
 		hud.DrawLine( new Vector2( 100, 100 ), new Vector2( 200, 200 ), 10, Color.White );
 
-		hud.DrawText( new TextRendering.Scope( "Hello!", Color.Red, 32 ), Screen.Width * 0.5f );
+		hud.DrawText( new TextRendering.Scope( "Hello!", Color.Red, 32 ), new Vector2( Screen.Width * 0.5f, 100 ) );
 	}
 ```

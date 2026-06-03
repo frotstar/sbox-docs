@@ -21,8 +21,8 @@ Filename: `Localization/en/sandbox.json`
 {
   "menu.helloworld": "Hello World",
   "spawnmenu.props": "Models",
-  "spawnmenu.tools": "Tools"
-  "spawnmenu.cloud": "sbox.game",
+  "spawnmenu.tools": "Tools",
+  "spawnmenu.cloud": "sbox.game"
 }
 ```
 

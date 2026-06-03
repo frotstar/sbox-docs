@@ -145,7 +145,7 @@ These work across most properties:
 | font-weight | normal (default) / bold / light / bolder / lighter / black / int | `font-weight: bold;`,`font-weight: 300;` |
 | gap  | Length, Length (optional) / normal | Shorthand for `row-gap` and `column-gap`, specified the size of gutters. |
 | height | Length     |                  |
-| image-rendering | auto (default) / anisotropic / bilinear / trilinear / point / pixelated / nearest-neighbour / crisp-edges | `crisp-edges` uses point sampling. |
+| image-rendering | auto (default) / anisotropic / bilinear / trilinear / point / pixelated / nearest-neighbor / crisp-edges | `crisp-edges` uses point sampling. |
 | inset | Length (1–4 values) | Shorthand for `top`, `right`, `bottom` and `left`. |
 | inset-block | Length, Length (optional) | Shorthand for `inset-block-start` and `inset-block-end`. |
 | inset-block-end | Length     |                  |
