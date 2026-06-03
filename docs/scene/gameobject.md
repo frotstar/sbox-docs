@@ -53,12 +53,6 @@ Tags are inherited. If a parent has the tag, then so does the child. The only wa
 GameObject children are available via `GameObject.Children`. This is just a list of GameObjects.
 
 
-:::warning
-We should really lock this down a bit more. Make it readonlylist or something.
-
-:::
-
-
 # Components
 
 GameObjects implement functionality using [Components](/scene/components/index.md).

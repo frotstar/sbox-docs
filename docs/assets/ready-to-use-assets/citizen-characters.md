@@ -9,16 +9,6 @@ updated: 2025-09-01
 
 ![](https://files.facepunch.com/maxlebled/1b1211b1/citizen_header.jpg)The Citizen character is a default player model provided by Facepunch.
 
-# How to use them?
-
-
-
-:::info
-This section needs to be rewritten with an explanation of all the code, libraries, etc.
-
-:::
-
-
 # Character source files
 
 **All source files come with the game: VMDLs, FBXs, animgraphs, etc.**
@@ -99,7 +89,7 @@ To give you an idea of how we use LODs on the Citizen... here are the figures fo
 * **LOD1:** 4.2k tris (+ 7.2k head) @ distance of 5, so it happens fairly close and very fast. **This level is used to trim the low-hanging fruit that has an almost-zero impact to visuals, as soon as possible.** Here, we only use LOD1 to trim the poly density of the feet and fingers. The body and leg meshes remain the exact same; this means far fewer headaches with not needing to sync with underlying topology there. The head remains the same as LOD0(\*).
 * **LOD2:** 1.7k tris (+ 1.0k head) @ distance of 20. We are at a medium distance, slightly on the side of long. Helper bones are culled.
 * **LOD3:** 1.0k tris (+ 0.4k head) @ distance of 40. Long distance. Even more bones are culled.
-* **LOD3:** 1.0k tris (+ 0.2k head) @ distance of 70. Longest distance. This only reduces the head further, cutting down a bit more of its geometry, but most importantly removes its eyes, which cuts down the material count (and therefore draw calls) by one.
+* **LOD4:** 1.0k tris (+ 0.2k head) @ distance of 70. Longest distance. This only reduces the head further, cutting down a bit more of its geometry, but most importantly removes its eyes, which cuts down the material count (and therefore draw calls) by one.
 
 *(\*) For now. Whenever our tech & tools allow us to start maintaining a lower-density head with no headaches with regards to transferring morphs etc., we'll probably try to target a 4-5k tris head for LOD1.*
 

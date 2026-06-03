@@ -25,7 +25,7 @@ To create a new Terrain Material, select your Terrain GameObject and look at the
 
 A resource editor window will open allowing you to select and modify the properties of the Terrain Material.
 
-You can also create a Terrain Material that isn't automatically associated with a Terrain, by rick-clicking the Asset Browser and selecting **New Asset → New Terrain Material…**
+You can also create a Terrain Material that isn't automatically associated with a Terrain, by right-clicking the Asset Browser and selecting **New Asset → New Terrain Material…**
 
 ## Adding Terrain Materials
 
@@ -37,8 +37,6 @@ Terrain Materials can be found on the cloud by clicking the Browse… button, or
 
 
 ![](./images/terrain-material-properties.png)
-
-This is where I describe each property in an overwhelming amount of detail.
 
 ## Painting Terrain Materials
 
