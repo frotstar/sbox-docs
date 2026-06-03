@@ -57,15 +57,15 @@ This is an example of how you could use `CodeGenerator` to create a system for n
 :::
 
 ```csharp
-[CodeGenerator( CodeGeneratorFlags.WrapPropertySet | CodeGeneratorFlags.Instance, "OnNetVarSet" )]
-[CodeGenerator( CodeGeneratorFlags.WrapPropertyGet | CodeGeneratorFlags.Instance, "OnNetVarGet" )]
+[CodeGenerator( CodeGeneratorFlags.WrapPropertySet | CodeGeneratorFlags.Instance, "OnWrapSet" )]
+[CodeGenerator( CodeGeneratorFlags.WrapPropertyGet | CodeGeneratorFlags.Instance, "OnWrapGet" )]
 public class NetVar : Attribute {}
 
 public class MyObject
 {
   [NetVar] public string Name { get; set; }
   
-  internal T OnWrapGet<T>( WrappedPropertyGet<T> p)
+  internal T OnWrapGet<T>( WrappedPropertyGet<T> p )
   {
     // Return the actual value from the network.
     if ( MyNetVarTable.TryGetValue( p.PropertyName, out var netValue ) )
@@ -73,18 +73,18 @@ public class MyObject
       return (T)netValue;
     }
     
-    return val;
+    return p.Value;
   }
 
   internal void OnWrapSet<T>( WrappedPropertySet<T> p )
   {
     if ( IsServer )
     {
-      MyNetVarTable[propertyName] = p.Value;
+      MyNetVarTable[p.PropertyName] = p.Value;
       // Send a networked message setting the property to this value for all clients.
     }
     
-    p.Setter( p.Value);
+    p.Setter( p.Value );
   }
 }
 ```
@@ -93,7 +93,7 @@ public class MyObject
 # Code Generator Flags
 
 The `CodeGenerator` attribute needs to have `CodeGeneratorFlags` set which determine what it will wrap and whether the wrapping applies to static methods and properties or instance methods and properties or both.
-nAn attribute class can be decorated with more than one `CodeGenerator` attribute to handle many different scenarios.
+An attribute class can be decorated with more than one `CodeGenerator` attribute to handle many different scenarios.
 
 
 # Wrapping Methods
@@ -142,7 +142,7 @@ public class MyObject
 	internal static void OnMethodInvokedStatic<T1, T2>( WrappedMethod m, T1 arg1, T2 arg2 ) {}
 	
 	internal void OnMethodInvoked( WrappedMethod m, bool enabled ) {}
-	internal void OnMethodInvoked<T1, T2, T3>( WrappedMethod m, T1 arg1, T2 arg3, T3 arg3 ) {}
+	internal void OnMethodInvoked<T1, T2, T3>( WrappedMethod m, T1 arg1, T2 arg2, T3 arg3 ) {}
 }
 ```
 

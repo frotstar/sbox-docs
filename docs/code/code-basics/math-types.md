@@ -18,7 +18,7 @@ A **Vector** is just a set of numbers that describe a position or a direction in
 * **Vector2Int + Vector3Int** – like normal, but with whole numbers only.
 
 
-```javascript
+```csharp
 // Make a new vector
 var a = new Vector3(1, 2, 3);
 var b = new Vector3(4, 5, 6);
@@ -70,7 +70,7 @@ Angles ang = new Angles(30, 90, 0);  // pitch, yaw, roll
 Rotation rot = ang.ToRotation();
 
 // Convert back to Angles
-Angles ang2 = rot.ToAngles();
+Angles ang2 = rot.Angles();
 
 // Get direction vectors from a Rotation
 Vector3 fwd = rot.Forward;
@@ -125,7 +125,7 @@ Transform custom = new Transform(pos, rot, 1f);  // scale is 1
 // Access individual parts
 Vector3 p = custom.Position;
 Rotation r = custom.Rotation;
-float scale = custom.Scale;
+Vector3 scale = custom.Scale;
 
 // Get direction vectors from the transform
 Vector3 forward = custom.Forward;
@@ -139,9 +139,11 @@ Vector3 world = custom.PointToWorld(local);
 // Move a point from world space to local space
 Vector3 backToLocal = custom.PointToLocal(world);
 
-// You can also turn the Transform into a Matrix
-Matrix mat = custom.ToMatrix();
+// You can also build a Matrix from the Transform's parts
+Matrix mat = Matrix.CreateScale(custom.Scale)
+	* Matrix.CreateRotation(custom.Rotation)
+	* Matrix.CreateTranslation(custom.Position);
 
-// Or create a Transform from a Matrix
-Transform fromMat = Transform.FromMatrix(mat);
+// And use that Matrix to transform a point
+Vector3 transformed = mat.Transform(local);
 ```
