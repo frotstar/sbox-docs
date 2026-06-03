@@ -15,7 +15,7 @@ In some circumstances you may want to add additional data to the network snapsho
 
 # Writing Snapshot Data
 
-To write snapshot data for a Component you can simply override the `WriteSnapshot` method on a component.
+To write snapshot data for a Component you can simply implement the `WriteSnapshot` method on a component.
 
 
 ```csharp
@@ -23,7 +23,6 @@ To write snapshot data for a Component you can simply override the `WriteSnapsho
     
 	void INetworkSnapshot.WriteSnapshot( ref ByteStream writer )
 	{
-        writer.Write( MyVoxelData.Length );
 		writer.WriteArray( MyVoxelData );
 	}
 ```
@@ -31,17 +30,16 @@ To write snapshot data for a Component you can simply override the `WriteSnapsho
 
 # Reading Snapshot Data
 
-Reading snapshot data can be done by overriding `ReadSnapshot` on a component. You can return a Task here to have the loading screen wait for this to be done before continuing.
+Reading snapshot data can be done by implementing `ReadSnapshot` on a component. If you have expensive loading work to do with this data, override `OnLoad` and return a `Task` so the loading screen waits for it to finish before continuing.
 
 
 ```csharp
 	void INetworkSnapshot.ReadSnapshot( ref ByteStream reader )
 	{
-        var length = reader.Read<int>();
-        MyVoxelData = reader.ReadArray<byte>( length ).ToArray();
+        MyVoxelData = reader.ReadArray<byte>();
 	}
  
-    protected override Task OnLoad()
+    protected override async Task OnLoad()
     {
         await LoadVoxelWorld( MyVoxelData );
     }
@@ -49,5 +47,6 @@ Reading snapshot data can be done by overriding `ReadSnapshot` on a component. Y
 	private Task LoadVoxelWorld( byte[] data )
 	{
 		// ...
+		return Task.CompletedTask;
 	}
 ```

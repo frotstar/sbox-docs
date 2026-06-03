@@ -12,7 +12,7 @@ On a Dedicated Server, you can specify who is an admin of your server, or custom
 
 ## Users
 
-On your Dedicated Server, you can edit the `users/config.json` file to add specific permissions per user. The default config demonstrates how these are set up.
+On your Dedicated Server, you can edit the `config/users.json` file to add specific permissions per user. The default config demonstrates how these are set up.
 
 
 ```json
