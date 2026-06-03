@@ -61,7 +61,7 @@ clip.Update( time );
 You can search for tracks by path.
 
 ```csharp
-var camTrack = clip.GetReference( "Camera" );
+var camTrack = clip.GetReference<GameObject>( "Camera" );
 var posTrack = clip.GetProperty<Vector3>( "Camera", "LocalPosition" );
 ```
 
@@ -96,7 +96,7 @@ target.Bind( Game.ActiveScene.Camera.GameObject );
 Binders can be serialized too.
 
 ```csharp
-Log.Info( Json.Serialize( Binder.Default ) );
+Log.Info( Json.Serialize( TrackBinder.Default ) );
 ```
 
 We can have multiple *Binder* instances, so the same clip can control different objects.
@@ -117,7 +117,7 @@ cameraTrack.Update( time, binder );
 
 ## Target Creation
 
-By default, the player will create any *GameObject*s or *Component*s referenced by the recording that aren't already in the scene. These targets will be flagged as *NotSaved | NotNetworked | Hidden*. You can turn this off with the *CreateTargets* property.
+By default, the player will create any *GameObject*s or *Component*s referenced by the recording that aren't already in the scene. These targets will be flagged as *NotSaved | NotNetworked*. You can turn this off with the *CreateTargets* property.
 
 ```csharp
 moviePlayer.CreateTargets = false;
@@ -145,7 +145,7 @@ The MoviePlayer component has a clip, a binder, and a time position.
 var moviePlayer = GameObject.AddComponent<MoviePlayer>();
 
 moviePlayer.Clip = clip;
-moviePlayer.Binder.Get( clip.GetReference( "Camera" ) ).Bind( Game.ActiveScene.Camera );
+moviePlayer.Binder.Get( clip.GetReference<GameObject>( "Camera" ) ).Bind( Game.ActiveScene.Camera );
 
 // Time in seconds
 

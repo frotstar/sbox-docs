@@ -51,14 +51,16 @@ Encodes a sequence of RGBA frames into a video file. Used internally by the scre
 
 | Codec | Containers | Notes |
 |---|---|---|
-| VP9 | .webm, .mp4 | Best compatbility |
+| VP9 | .webm, .mp4 | Best compatibility |
 | AV1 | .webm, .mp4 | Best compression and quality |
 | WebP | .webp | Animated WebP, supports transparency |
 
 WebM supports transparency. The `EncodingPreset` on `VideoWriter.Config` controls speed vs quality: `Fast` for real-time recording, `Balanced` for general use, `Quality` for offline export.
 
+`VideoWriter` is editor-only and is created through `EditorUtility.CreateVideoWriter()` (in the `Editor` namespace); its constructor is internal.
+
 ```csharp
-var writer = new VideoWriter( "recordings/output.mp4", new VideoWriter.Config
+var writer = EditorUtility.CreateVideoWriter( "recordings/output.mp4", new VideoWriter.Config
 {
     Width = 1920,
     Height = 1080,
