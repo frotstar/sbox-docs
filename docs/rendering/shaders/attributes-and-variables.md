@@ -59,7 +59,7 @@ The following attributes are supported for constants:
 
 `DefaultFile( arg )` - Defaults to this file if none is specified, for Textures
 
-### Textures
+## **Textures**
 
 You can define an image to use on the material editor UI as follows:
 
@@ -89,7 +89,7 @@ Texture2D Albedo < Channel( RGBA, Box( AlbedoImage ) ); >;
 
 This compiles an image into a texture using box filtering for mipmaps.
 
-### **Advanced Usage**
+### Advanced Channel Usage
 
 You can pack channels of multiple images into a single texture specifying which channel the image will be sampled from
 
@@ -100,7 +100,109 @@ Texture2D RMA < Channel( R, Box( Roughness ), Linear );
                 Channel( A, Box( BlendMask ), Linear ); >;
 ```
 
-## GPU Buffers
+## **Mip Generators**
+
+:::warning
+💩 **Obscure/old features - everything in this section provided as-is.** You're free to use this information if you agree to following conditions: 1) it may break in the future, anytime, for any reason, 2) you're ok with that fact. 
+
+:::
+
+Second argument in `Channel()` macro is the mip generation method. Most common one is `Box`, which simply creates mips with box filtering. This is what you should use most of the time anyway. Here is a list of other commonly used methods: 
+
+| Mipmap Method | Description |
+|---------------|-------------|
+| `Box( TexA )` | Generate mips with simple box filtering |
+| `PreserveCoverage( TexA )` | Preserves opacity coverage for each mip, nice for transparent textures that must maintain detail on every mip level |
+| `AlphaWeighted( Color, Opacity )` | Computes special mips for color maps by weighing the opacity texture. Lower mips "extrude" the color map based on opacity mask, which eliminates some issues with texture accuracy at lower mips. Takes two textures. |
+
+And there is also a number of other mip generators which are listed here just for the reference. 
+
+| Mipmap Method | Description |
+|---------------|-------------|
+| `None( TexA )` | Don't generate mips for this texture |
+| `MultiplyBox( TexA, TexB )` | Multiplies two texture inputs together and then generates mips using box filtering |
+| `MultiplyNoMip( TexA, TexB )` | Same as `Multiply`, but won't generate any mips | 
+| `HemiOctNormal( TexA )` | Takes regular RGB tangent normal map and then applies hemispheric octahedron normal map encoding which will be stored into **green** and **alpha**. If you don't have these channels selected in **Channel** macro, then it will not work correctly |
+| `HemiOctIsoRoughness_RG_B( TexA )` | ... |
+| `HemiOctAnisoRoughness_RG_BA( TexA )` | ... |
+| `AnisoRoughness_RG( TexA )` | ... | 
+| `HemiOctAnisoRoughness( Normal, Roughness )` | ... |
+| `AnisoNormal( TexA )` | ... | 
+| `AnisoNormalRoughness( Normal, Roughness )` | ... |
+| `Nice( TexA )` | Pretty close to box filtering, but mips are sharper |
+| `AutoLevels( TexA )` | Generates mips using box filtering and then applies autolevel color adjustments, think of it like Photoshop effect where it automatically tries to balance out the color range | 
+| `BoxInverse( TexA )` | Generate mips with simple box filtering, but the result texture is inverted | 
+| `BoxN( TexA )` | Where N = number of max mips. So if you do `Box2( Texture )`, you will have only two mip levels. Uses box filtering. |
+| `WrapGaussian( TexA )` | Mips with gaussian blur |
+| `HeightCombine( HeightA, HeightB )` | Generates mips and combines two heightmaps together |
+
+### Some Mips Previews
+
+* **ALPHA WEIGHTED: RGB Color map**
+![](./images/mips_alphaweighted_1.png)
+
+* **VARIOUS NORMAL PROCESSING METHODS:** Box, HemiOctNormal (Green & Alpha), AnisoNormalRoughness
+![](./images/mips_hemioct.png)
+
+* **BOX, NICE AND WRAPGAUSSIAN**
+![](./images/mips_boxnicegaussian.png)
+
+## **Shader Attributes**
+
+:::warning
+💩 **Obscure/old features - everything in this section provided as-is.** You're free to use this information if you agree to following conditions: 1) it may break in the future, anytime, for any reason, 2) you're ok with that fact. 
+
+:::
+
+In some shaders you may find such things as `BoolAttribute` and `TextureAttribute`. This is special attribute data which is read by engine for various rendering/utility purposes. In most cases you do not need to worry about them, but they are still listed here for the reference in case you ever wonder what are they doing in shader source code.
+
+### Bool Attributes
+
+| Bool Attribute | Description |
+|----------------|-------------|
+| translucent | Marks material as translucent, disables shadows, required for proper transparency. Can quickly access this attribute in C# using `Flags.IsTranslucent` |
+| alphatest | Indicates that shader has alpha test enabled. Can quickly access this flag in C# using `Flags.IsAlphaTest` |
+| sky | Indicates that this shader represents a skybox. Can quickly access this flag in C# using `Flags.IsSky` |
+| SupportsMappingDimensions | If set to **true**, Material Editor will add settings for world mapping in "Attributes" tab. May be useful if you are using Hammer. |
+| bWantsFBCopyTexture | Indicates that scene object needs a copy of frame buffer texture. Must be set to **true** if you want to read frame buffer texture in your shader. |
+| NoZPrepass | If **true**, objects with your shader will opt out of Z prepass |
+| DoNotCastShadows | This should disable shadow rendering on given material, but I don't know if this still works. TODO |
+
+### Texture Attributes
+
+Unless you plan to build your maps with Hammer and bake lightmaps, most of these texture attributes will be useless for you. It may be handy to use `RepresentativeTexture` for now though.
+
+| Texture Attribute | Description |
+|-------------------|-------------|
+| RepresentativeTexture | This is used to display a 'representative' texture in number of tools, for example fast texturing tool. It will be displayed in tools when working with a material that uses your shader. |
+| LightSim_DiffuseAlbedoTexture | Represents the albedo/diffuse texture for light baking in Hammer |
+| LightSim_Opacity_A | Represents the opacity mask texture for light baking in Hammer |
+| LightSim_SelfIllumMaskTexture | Represents the emissive texture for light baking in Hammer |
+
+### Float Attributes
+
+You can assign `float` and `float3` attributes from your code using `FloatAttribute` and `Float3Attribute` accordingly. Just like with texture attributes, most of them are used for the Hammer light baking - so you will not find any of these useful unless you plan to build & bake light maps in Hammer. 
+
+| Float Attribute | Description |
+|-----------------|-------------|
+| `Float` LightSim_SelfIllumScale | Sets the intensity of emissive map for light baker in Hammer |
+| `Float3` LightSim_SelfIllumTint | Sets the tint color of emissive map for light baker in Hammer | 
+
+### Usage
+
+These attributes are primarily read by native C++ engine, however in s&box you can also read the values using `Flags` in **Material** class, using `GetInt` and `GetFloat`:
+
+```cpp
+BoolAttribute( SomeValueAttributeFromShader, false ); 
+FloatAttribute( SomeFloatAttributeFromShader, 34.5f );
+```
+
+```csharp
+var myValue = material.Flags.GetInt( "SomeValueAttributeFromShader" );
+var myFloat = material.Flags.GetFloat( "SomeFloatAttributeFromShader" );
+```
+
+## **GPU Buffers**
 
 If you want to send a lot of information at once you can use Constant Buffers or Structured Buffers:
 
@@ -136,7 +238,7 @@ cbuffer Constants
 }
 ```
 
-## Attributes on SceneObjects
+## **Attributes on SceneObjects**
 
 You can set attributes of a specific SceneObject, this will affect the materials that are being used on that object when rendering, it does not need to be in a render block.
 
@@ -153,7 +255,7 @@ You can set attributes of a specific SceneObject, this will affect the materials
 	}
 ```
 
-## Attributes on Command Lists
+## **Attributes on Command Lists**
 
 You can use attributes on the entire render context or the rest of the pipeline when you set them on a [Command List](/rendering/shaders/command-lists.md).
 
