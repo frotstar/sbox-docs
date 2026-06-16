@@ -13,6 +13,8 @@ items:
   href: g-buffer.md
 - name: Light
   href: light.md
+- name: Procedural Effects
+  href: procedural-fx.md
 - name: Motion
   href: motion.md
 - name: Screen Space Tracing
