@@ -1,6 +1,6 @@
 ---
 title: "G-Buffer"
-icon: "notepad"
+icon: "🌍"
 created: 2025-07-28
 updated: 2025-06-15
 ---
