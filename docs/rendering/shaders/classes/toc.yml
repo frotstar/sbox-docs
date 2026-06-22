@@ -7,6 +7,8 @@ items:
   href: depth.md
 - name: Dynamic Reflections
   href: dynamic-reflections.md
+- name: Decals
+  href: decals.md
 - name: Fog
   href: fog.md
 - name: EnvMap
