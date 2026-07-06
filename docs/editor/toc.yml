@@ -17,6 +17,8 @@ items:
   href: editor-widgets.md
 - name: Mapping
   href: mapping/
+- name: MCP Server
+  href: mcp-server.md
 - name: Model Editor
   href: model-editor.md
 - name: Property Attributes
