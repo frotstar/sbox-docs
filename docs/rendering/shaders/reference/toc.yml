@@ -3,6 +3,8 @@ items:
   href: default-vertex-and-pixel-shader-inputs.md
 - name: Global Variables
   href: global-variables.md
+- name: Feature Upgrade
+  href: feature-upgrade.md
 - name: Screen-Space Reflections
   href: screen-space-reflections.md
 - name: Vertex Helpers
