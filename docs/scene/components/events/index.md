@@ -59,8 +59,8 @@ public interface IPlayerEvent : ISceneEvent<IPlayerEvent>
 	void OnLand( Player player, float distance, Vector3 velocity ) { }
 	void OnTakeDamage( Player player, float damage ) { }
 	void OnDied( Player player ) { }
-	void OnWeaponAdded( Player player, BaseWeapon weapon ) { }
-	void OnWeaponDropped( Player player, BaseWeapon weapon ) { }
+	void OnWeaponAdded( Player player, BaseCombatWeapon weapon ) { }
+	void OnWeaponDropped( Player player, BaseCombatWeapon weapon ) { }
 
 	void OnCameraMove( Player player, ref Angles angles ) { }
 	void OnCameraSetup( Player player, CameraComponent camera ) { }
@@ -107,7 +107,7 @@ public class MyComponent : Component, ISceneLoadingEvents
 //
 // A camera component weapon, which listens to IPlayerEvent.
 //
-public class CameraWeapon : BaseWeapon, IPlayerEvent
+public class CameraWeapon : BaseCombatWeapon, IPlayerEvent
 {
 	void IPlayerEvent.OnCameraMove( Player player, ref Angles angles )
 	{

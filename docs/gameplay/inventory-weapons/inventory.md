@@ -7,7 +7,7 @@ updated: 2026-07-04
 
 # Inventory
 
-Add an `InventoryComponent` to your player and it can carry things. It keeps items in slots, remembers which one is deployed, and handles picking up, dropping and switching.
+Add a `BaseInventoryComponent` to your player and it can carry things. It keeps items in slots, remembers which one is deployed, and handles picking up, dropping and switching.
 
 ## Slots
 
@@ -43,7 +43,7 @@ Turn the Loadout feature on to have starting gear. `StartingItems` is a list of 
 `Switch( item )` deploys an item, `Drop( item )` throws it out into the world, `Remove( item )` destroys it. Query what's held with `Items`, `ActiveItem`, `GetSlot( n )` and `GetItem<T>()`.
 
 ```csharp
-var inventory = player.GetComponent<InventoryComponent>();
+var inventory = player.GetComponent<BaseInventoryComponent>();
 var item = inventory.ActiveItem;
 
 if ( item.IsValid() )
@@ -54,7 +54,7 @@ All of this is host authoritative. The owning client can call these too, they ro
 
 ## Ammo
 
-Reserve ammo lives on the inventory, not on the weapon, so two guns that share an ammo type share their reserve. An ammo type is an `AmmoResource` asset with a name, an icon and a max reserve. Create one from the Asset Browser.
+Reserve ammo lives on the inventory, not on the weapon, so two guns that share an ammo type share their reserve. An ammo type is a `BaseAmmoResource` asset with a name, an icon and a max reserve. Create one from the Asset Browser.
 
 `GetAmmo`, `GiveAmmo` and `TakeAmmo` on the inventory read and change the pool.
 

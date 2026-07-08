@@ -7,11 +7,11 @@ updated: 2026-07-04
 
 # Weapons
 
-`BaseWeapon` is the base for anything a player holds and uses. Guns work straight out of the box, and it stretches to melee weapons and tools with a small subclass.
+`BaseCombatWeapon` is the base for anything a player holds and uses. Guns work straight out of the box, and it stretches to melee weapons and tools with a small subclass.
 
 ## Setting up a gun
 
-Make a prefab with a BaseWeapon on it and fill in the inspector:
+Make a prefab with a BaseCombatWeapon on it and fill in the inspector:
 
 * **Shooting** has the fire rates, whether each trigger is automatic, and the `Ballistics` struct that drives the default attack: damage, pellets, range, spread and spread recovery. One pellet is a rifle, eight is a shotgun.
 * **Ammo** and **Reloading** are covered below.
@@ -40,7 +40,7 @@ Override `PrimaryAttack` or `SecondaryAttack` to change what firing does. The ba
 A melee weapon is a short range trace instead of a ballistic volley. Turn the Ammo feature off and override the attack:
 
 ```csharp
-public class Crowbar : BaseWeapon
+public class Crowbar : BaseCombatWeapon
 {
 	public override void PrimaryAttack()
 	{
@@ -56,7 +56,7 @@ public class Crowbar : BaseWeapon
 
 ### Tools
 
-Not everything a player holds hurts people. A camera, a grappling hook and a medkit are all BaseWeapon with Ammo turned off and an attack that does something else. You keep deploying, holstering, view models, switching and input handling for free, so a tool is usually just an override of `PrimaryAttack` that does the thing, the same shape as the crowbar above.
+Not everything a player holds hurts people. A camera, a grappling hook and a medkit are all BaseCombatWeapon with Ammo turned off and an attack that does something else. You keep deploying, holstering, view models, switching and input handling for free, so a tool is usually just an override of `PrimaryAttack` that does the thing, the same shape as the crowbar above.
 
 ## Networking
 
@@ -67,7 +67,7 @@ Weapons are host authoritative and owner predicted. The holding player fires ins
 Weapons draw a basic crosshair and nothing else. There's no ammo counter, build one yourself. Everything you need is synced, so it's safe to read from HUD code on any client:
 
 ```csharp
-if ( Inventory.ActiveItem is BaseWeapon weapon && weapon.UsesAmmo )
+if ( Inventory.ActiveItem is BaseCombatWeapon weapon && weapon.UsesAmmo )
 {
 	var clip = weapon.Clip1;     // rounds in the magazine, -1 when there's no magazine
 	var reserve = weapon.Ammo1;  // reserve ammo in the holder's pool
