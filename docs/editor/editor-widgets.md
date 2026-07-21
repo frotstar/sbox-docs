@@ -7,7 +7,7 @@ updated: 2024-11-10
 
 # Editor Widgets
 
-Editor UI is built entirely out of Widgets. Widgets are different from [Panels](/ui/index.md), which are used for in-game UI. Widgets can be various elements or components, such as labels, buttons, text boxes, trees, or images.
+The Editor UI is built entirely out of Widgets. Widgets are different from [Panels](/ui/index.md), which are used for in-game UI. Widgets can be various elements or components, such as labels, buttons, text boxes, trees, or images.
 
 If a Widget does not have a parent, it is a Root Widget. This Widget will act as a window on the user's OS.
 
@@ -38,6 +38,8 @@ public class ExampleWidget : Widget
 	}
 }
 ```
+```csharp
+```
 
 You can now create this Widget anywhere else in your Editor Project by doing the following:
 
@@ -53,10 +55,10 @@ parentWidget.Layout.Add(childExample);
 
 # Creating a Dockable Widget
 
-Creating a Widget with the \[Dock\] attribute will allow it to be docked within any DockWindow. It will also be added to the View menu so it can be toggled easily.
+Creating a Widget with the \[Dock\] attribute will allow it to be docked within any DockArea. It will also be added to the View menu so it can be toggled easily, the Dockarea is specified to determine where the Widget will be docked by default.
 
 ```csharp
-[Dock("Editor", "Example Editor Dock", "local_fire_department")]
+[Dock("Editor", "Example Editor Dock", "local_fire_department", Dockarea.Center)]
 ```
 
 ![The Dockable Window can now be opened/closed from the View menu](./images/the-dockable-window-can-now-be-opened-closed-from-the-view-m.png) ![How the Widget looks when un-docked](./images/how-the-widget-looks-when-un-docked.png)
