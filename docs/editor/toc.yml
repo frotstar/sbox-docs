@@ -13,6 +13,8 @@ items:
   href: editor-shortcuts.md
 - name: Editor Tools
   href: editor-tools/
+- name: Editor Theme
+  href: editor-theme.md
 - name: Editor Widgets
   href: editor-widgets.md
 - name: Mapping

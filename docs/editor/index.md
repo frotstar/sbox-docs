@@ -33,6 +33,7 @@ ModelDoc-based model editing and configuration.
 - [Custom Editors](/editor/custom-editors.md) — Custom inspector editors
 - [Property Attributes](/editor/property-attributes.md) — Inspector customization
 - [Asset Previews](/editor/asset-previews.md) — Custom asset preview rendering
+- [Editor Theme](/editor/editor-theme.md) — Editor theme colors, fonts, and layout
 - [Texture Generators](/editor/texture-generators.md) — Procedural textures
 - [Undo System](/editor/undo-system.md) — Undo/redo for editor operations
 - [Editor Events](/editor/editor-events.md) — Editor lifecycle hooks

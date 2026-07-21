@@ -1,8 +1,8 @@
 ---
 title: "Editor Widgets"
-icon: "⚙️"
+icon: "⚙️
 created: 2024-10-10
-updated: 2024-11-10
+updated: 2026-07-21
 ---
 
 # Editor Widgets
@@ -37,8 +37,6 @@ public class ExampleWidget : Widget
 		};
 	}
 }
-```
-```csharp
 ```
 
 You can now create this Widget anywhere else in your Editor Project by doing the following:

@@ -18,9 +18,9 @@ Editor projects are not sandboxed. They are not limited by any whitelists and ca
 
 # Creating
 
-To create an editor project you simply create a folder named "editor" in your project folder. Any code in this folder will be treated as part of the editor project.
+When you make a project, it will create a `Editor` Folder. Any code in this folder will be treated as part of the editor project.
 
-You will get a new project in your IDE called `<projectname>.editor`.
+You will also get a project in your IDE called `<projectname>.editor`.
 
 
 ![](./images/creating.png)
@@ -37,3 +37,4 @@ Creating an editor project lets you do a few special things.
 * Create new Editor Docks
 * Create [Editor Apps](/editor/editor-apps.md)
 * Create [Asset Previews](/editor/asset-previews.md)
+* Style UI with [Editor Theme](/editor/editor-theme.md) colors, fonts, and layout
